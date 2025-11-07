@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>智能八字解释器（专业版 · 中文）</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- 依赖：moment + moment-timezone + sxtwl-js（使用 CDN，如需离线请把库文件放入仓库并改为本地引用） -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sxtwl@1.1.15/sxtwl.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>智能八字解释器（专业版 · 中文）</h1>
+
+    <section class="card">
+      <h2>输入信息</h2>
+      <div class="form-row">
+        <label>公历出生日期：</label>
+        <input id="date" type="date" />
+      </div>
+      <div class="form-row">
+        <label>出生时间：</label>
+        <input id="time" type="time" step="60" />
+        <select id="tz" title="时区"></select>
+      </div>
+      <div class="form-row">
+        <label>出生地点（可选）：</label>
+        <input id="place" type="text" placeholder="例：Taipei 或 25.0330,121.5654" />
+        <small>可填城市以便时区校正（非必填）</small>
+      </div>
+
+      <div class="actions">
+        <button id="calcBtn">计算并解释八字</button>
+        <button id="copyBtn">复制解释结果</button>
+        <button id="exportBtn">导出 JSON</button>
+      </div>
+    </section>
+
+    <section class="card" id="resultCard" style="display:none;">
+      <h2>八字与解释</h2>
+      <div id="basicInfo"></div>
+
+      <h3>四柱（年 月 日 时）</h3>
+      <table id="baziTable">
+        <thead><tr><th>柱</th><th>天干</th><th>地支</th><th>藏干</th></tr></thead>
+        <tbody></tbody>
+      </table>
+
+      <h3>五行统计与日主强弱</h3>
+      <div id="wuxingSummary"></div>
+
+      <h3>喜用神建议（自动判定）</h3>
+      <div id="yongshen"></div>
+
+      <h3>简要职业/性格倾向建议（基于五行偏向）</h3>
+      <div id="suggestions"></div>
+
+      <h3>常用神煞（示例）</h3>
+      <div id="shenshaList"></div>
+
+      <h3>原始数据 / 调试信息</h3>
+      <pre id="debug" class="debug"></pre>
+    </section>
+
+    <footer>
+      <small>提示：解释基于常见简化规则与 sxtwl-js 的历法换算，供参考。如需按特定流派精细化判法或加入大运/流年，请告诉我优先项，我可继续扩展。</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
